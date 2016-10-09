@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 /*typedef 为一种数据类型定义一个新名字*/
 typedef void(^myArray) (NSArray *array);
 typedef int myInt;
