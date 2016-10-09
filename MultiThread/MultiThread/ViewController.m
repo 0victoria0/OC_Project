@@ -29,7 +29,8 @@
 }
 
 - (IBAction)gotoGCD:(id)sender {
-    GCDVC *gcdVC = [[GCDVC alloc] init];
+    UIStoryboard *gcdSB = [UIStoryboard storyboardWithName:@"GCD" bundle:nil];
+    NSThreadVC *gcdVC = [gcdSB instantiateViewControllerWithIdentifier:@"GCD"];
     [self presentViewController:gcdVC animated:YES completion:nil];
 }
 
