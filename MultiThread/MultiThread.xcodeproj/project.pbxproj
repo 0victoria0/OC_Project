@@ -18,6 +18,8 @@
 		556B119A1DA9F19600DBBFAE /* NSOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 556B11991DA9F19600DBBFAE /* NSOperationVC.m */; };
 		556B119C1DA9F89A00DBBFAE /* Thread.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556B119B1DA9F89A00DBBFAE /* Thread.storyboard */; };
 		556B11C61DAA26D900DBBFAE /* GCD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556B11C51DAA26D900DBBFAE /* GCD.storyboard */; };
+		557FA2431DAB83B60063ED96 /* ThreadDownImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 557FA2421DAB83B60063ED96 /* ThreadDownImage.m */; };
+		557FA2451DAB88920063ED96 /* ThreadDownImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557FA2441DAB88920063ED96 /* ThreadDownImage.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,9 @@
 		556B11991DA9F19600DBBFAE /* NSOperationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSOperationVC.m; sourceTree = "<group>"; };
 		556B119B1DA9F89A00DBBFAE /* Thread.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Thread.storyboard; sourceTree = "<group>"; };
 		556B11C51DAA26D900DBBFAE /* GCD.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GCD.storyboard; sourceTree = "<group>"; };
+		557FA2411DAB83B60063ED96 /* ThreadDownImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadDownImage.h; sourceTree = "<group>"; };
+		557FA2421DAB83B60063ED96 /* ThreadDownImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadDownImage.m; sourceTree = "<group>"; };
+		557FA2441DAB88920063ED96 /* ThreadDownImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ThreadDownImage.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,9 @@
 				556B11981DA9F19600DBBFAE /* NSOperationVC.h */,
 				556B11991DA9F19600DBBFAE /* NSOperationVC.m */,
 				556B11841DA9F06A00DBBFAE /* Main.storyboard */,
+				557FA2411DAB83B60063ED96 /* ThreadDownImage.h */,
+				557FA2421DAB83B60063ED96 /* ThreadDownImage.m */,
+				557FA2441DAB88920063ED96 /* ThreadDownImage.storyboard */,
 				556B11871DA9F06A00DBBFAE /* Assets.xcassets */,
 				556B11891DA9F06A00DBBFAE /* LaunchScreen.storyboard */,
 				556B118C1DA9F06A00DBBFAE /* Info.plist */,
@@ -160,6 +168,7 @@
 			files = (
 				556B119C1DA9F89A00DBBFAE /* Thread.storyboard in Resources */,
 				556B11C61DAA26D900DBBFAE /* GCD.storyboard in Resources */,
+				557FA2451DAB88920063ED96 /* ThreadDownImage.storyboard in Resources */,
 				556B118B1DA9F06A00DBBFAE /* LaunchScreen.storyboard in Resources */,
 				556B11881DA9F06A00DBBFAE /* Assets.xcassets in Resources */,
 				556B11861DA9F06A00DBBFAE /* Main.storyboard in Resources */,
@@ -174,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				556B11831DA9F06A00DBBFAE /* ViewController.m in Sources */,
+				557FA2431DAB83B60063ED96 /* ThreadDownImage.m in Sources */,
 				556B119A1DA9F19600DBBFAE /* NSOperationVC.m in Sources */,
 				556B11941DA9F0A900DBBFAE /* NSThreadVC.m in Sources */,
 				556B11971DA9F17800DBBFAE /* GCDVC.m in Sources */,

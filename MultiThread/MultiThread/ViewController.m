@@ -10,6 +10,7 @@
 #import "NSThreadVC.h"
 #import "GCDVC.h"
 #import "NSOperationVC.h"
+#import "ThreadDownImage.h"
 
 @interface ViewController ()
 
@@ -37,6 +38,12 @@
 - (IBAction)gotoNSOperation:(id)sender {
     NSOperationVC *operationVC = [[NSOperationVC alloc] init];
     [self presentViewController:operationVC animated:YES completion:nil];
+}
+
+- (IBAction)gotoDownImage:(id)sender {
+    UIStoryboard *downImageSB = [UIStoryboard storyboardWithName:@"ThreadDownImage" bundle:nil];
+    ThreadDownImage *downImageVC = [downImageSB instantiateViewControllerWithIdentifier:@"ThreadDownImage"];
+    [self presentViewController:downImageVC animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

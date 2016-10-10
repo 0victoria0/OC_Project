@@ -20,11 +20,63 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self testQueue];
     //创建串行队列
     self.serialQueue = dispatch_queue_create("serial.queue", DISPATCH_QUEUE_SERIAL);
     //创建并发队列
     self.concurrentQueue = dispatch_queue_create("concurrent.queue", DISPATCH_QUEUE_CONCURRENT);
+    //主队列死锁的情况
+    //[self mainThreadDeadLock];
+    //同步串行队列再次使用该串行队列死锁的情况
+    //[self syncSerialDeadLock];
+    //[self unDeadLock];
+}
+
+#pragma mark -
+#pragma mark -  主队列死锁,运行崩溃
+/*
+ iOS开发中，主队列是串行队列，在主队列中，同步使用主队列之行任务，会造成死锁。
+ 在同一个同步串行队列中，再次使用该串行队列同步的执行任务，会造成死锁。
+ */
+- (void)mainThreadDeadLock{
+    /*mainThread的任务是完成这个函数，这个函数的任务是完成sync的Block代码块，要想完成这个函数任务，就得先完成sync的Block代码块任务，而sync的Block代码块任务是主队列中后加入的，要想完成它，就得先完成函数任务，造成死锁*/
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSLog(@"111111");
+    });
+}
+
+#pragma mark -
+#pragma mark -  不懂死锁原理的，可能认为是死锁，其实并不是
+- (void)unDeadLock{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"=================1");
+        for (int i = 0 ; i < 100; i++) {
+            NSLog(@"%@===......-......===%d",[NSThread currentThread],i);
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"=================2");
+            for (int i = 0; i < 100; i++) {
+                NSLog(@"%@------------------%d",[NSThread currentThread],i);
+            }
+        });
+        NSLog(@"=================3");
+    });
+    [NSThread sleepForTimeInterval:5];
+    NSLog(@"不会阻塞线程");//这里执行完了，才走2那里
+}
+
+#pragma mark -
+#pragma mark -  同步串行队列死锁,运行崩溃
+- (void)syncSerialDeadLock{
+    dispatch_queue_t serialQueue = dispatch_queue_create("serialQueue", DISPATCH_QUEUE_SERIAL);
+    dispatch_sync(serialQueue, ^{//--
+        NSLog(@"111111");//可以打印输出
+        /*serialQueue的第一个任务是完成第一个sync的Block代码块，serialQueue的第二个任务是完成第二个sync的代码块，但是第一个sync的block代码块的完成时，需要先完成第二个sync的代码块任务，但第二个sync的代码块是串行队列的第二个任务，要先完成第一个任务才可以执行第二个任务前后矛盾，造成死锁*/
+        dispatch_sync(serialQueue, ^{//这里崩溃
+            NSLog(@"222222");
+        });
+        NSLog(@"333333");
+    });
+    NSLog(@"444444");
 }
 
 #pragma mark -
@@ -100,29 +152,8 @@
     });
 }
 
-#pragma mark -
-#pragma mark -  异步下载图片
-- (void)asyncDownImage:(NSString *)urlString{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:3];
-        //下载图片2
-        NSURL *url2= [NSURL URLWithString:urlString];
-        NSData *data2 = [[NSData alloc] initWithContentsOfURL:url2];
-        UIImage *image2 = [UIImage imageWithData:data2];
-        if (image2 != nil) {
-            //将代码块提交给主线程关联的队列，该代码将会由主线程完成
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.view.backgroundColor = [UIColor colorWithPatternImage:image2];
-            });
-        }else{
-            NSLog(@"图片xiaz失败");
-        }
-    });
-}
-
 -(void)testQueue{
     dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_queue_t concurrentQueue = dispatch_queue_create("my.queue", DISPATCH_QUEUE_CONCURRENT);
     NSLog(@"1");
     dispatch_sync(queue, ^(){
         NSLog(@"2");
